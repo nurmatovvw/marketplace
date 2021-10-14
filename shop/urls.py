@@ -7,6 +7,8 @@ from .views.register import register
 from .views.signout import  signout
 from .views.cartAdd import cartAdd
 from .views.category import pr_by_category
+from .views.search import search
+from .views.order import order
 
 urlpatterns = [
   path('', homepage, name='homepage'),
@@ -17,5 +19,7 @@ urlpatterns = [
   path('signout',signout,name='signout'),                        #выход (выйти)
   path('addToCartAdd/<int:pk>',addToCart,name='addToCart'),
   path('remove_from_cart/<int:pk>',remove_from_cart,name='remove_from_cart'),
-  path('category/<int:pk>',pr_by_category,name='pr_by_category')
+  path('category/<int:pk>',pr_by_category,name='pr_by_category'),
+  path('search/',search,name='search'),
+  path('order/',order,name='order')
 ] 

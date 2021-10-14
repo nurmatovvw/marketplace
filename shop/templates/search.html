@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %} Search {% endblock %}
+
+{% block content %}
+{% if searched_product_from_input %}
+    <div class="container pt-5">
+        <div class="row">
+         <h1>Вы ищете:<b style="color: chocolate;">({{searched_product_from_input}})</b></h1>
+          <div class="col-md-8 order-md-2 col-lg-9">
+            <div class="container-fluid">
+              <div class="row   mb-5">
+                <div class="col-12">
+                </div>
+              </div>
+              
+              <div class="row">
+                {% for product in searched_products %}
+                <div class="col-6 col-md-6 col-lg-4 mb-3">
+                  <div class="card h-100 border-0" style="background-image:url(https://oir.mobi/uploads/posts/2021-03/thumbs/1616579062_29-p-cherno-oranzhevii-fon-37.png); border-radius: 10px 60px 10px 60px; background-repeat: no-repeat; background-size: 343%;">
+                    {% if product.image %}
+                    <div class="card-img-top">
+                      <img src="{{product.image.url}}" class="img-fluid mx-auto d-block" style=" border-radius: 15px 20px 15px 20px;" alt="Card image cap" width="100%"><span class="badge bg-warning">Новый
+                    </div>
+                    {% else %}
+                    <div class="card-img-top">
+                      <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid mx-auto d-block" alt="Card image cap" width="100%">
+                    </div>
+                    {% endif %}
+                      <div class="card-body text-center">
+                      <h4 class="card-title">
+                        <a href="{% url 'detail' pk=product.pk  %}" class="font-weight-bold text-light text-uppercase small"> {{product.name}}</a>
+                      </h4>
+                      <p class="card-text" style="color: ivory;">{{product.category}}</p>
+                      <h5 class="card-price small text-warning">
+                        <i>
+                          {{product.price}} сом</i>
+                      </h5>
+                      <a href="{% url 'addToCart' pk=product.pk %}" class="btn btn-dark">Добавить в карзину </a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div><div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
+            <h3 class="mt-0 mb-5">Показывать <span class="text-warning">({{searched_products.count}})</span></h3>
+            <h6 class="text-uppercase font-weight-bold mb-3">Категории</h6>
+            <div class="list-group divider mt-2 mb-2">
+              <a href="{% url 'homepage'  %}" class="form-control btn btn-outline-warning form-control-dark d-flex justify-content-between align-items-center">
+               Все категории
+                <span class="badge bg-dark rounded-pill">{{Categories.count}}</span>
+              </a>
+            </div>
+            {% for category in Categories %}
+            <div class="list-group divider mt-2 mb-2">
+              <a href="{% url 'pr_by_category' pk=category.pk %}" class="form-control btn btn-outline-warning form-control-dark d-flex justify-content-between align-items-center">
+                {{category.name}}
+                <span class="badge bg-dark rounded-pill">{{category.products_count}}</span>
+              </a>
+            </div>
+            {% endfor %}
+            <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
+            <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Размер</h6>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="filter-size-1">
+                <label class="custom-control-label" for="filter-size-1">X-Small</label>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="filter-size-2">
+                <label class="custom-control-label" for="filter-size-2">Small</label>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="filter-size-3">
+                <label class="custom-control-label" for="filter-size-3">Medium</label>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="filter-size-4">
+                <label class="custom-control-label" for="filter-size-4">Large</label>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 pl-2">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="filter-size-5">
+                <label class="custom-control-label" for="filter-size-5">X-Large</label>
+              </div>
+            </div>
+            <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
+            <a class=" btn btn-warning"  href="{% url 'homepage' %}">Update result</a>
+        </div>
+      </div>
+</div>
+
+{% endif %}
+{% endblock %}

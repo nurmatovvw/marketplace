@@ -44,13 +44,10 @@
 
 
       .body {    
-          background-image: url('https://oir.mobi/uploads/posts/2021-03/thumbs/1616579062_29-p-cherno-oranzhevii-fon-37.png');
           background-repeat: no-repeat;
           background-attachment: fixed;
           background-size: 116%;
-      }
-      *{
-        color: ivory;
+          background: -moz-linear-gradient(left, #ffffff , #000000 80%);
       }
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
@@ -64,7 +61,7 @@
     <link href="pricing.css" rel="stylesheet">
   </head>
   <body class="body" >
-    <header class="p-3 bg-dark text-white "style="background: -moz-linear-gradient(left, #ffc107 , #000000 75%);">
+    <header class="p-3 bg-dark" style="background: -moz-linear-gradient(left, #ffc107 , #000000 75%);">
       <div class="container">
 
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -72,29 +69,36 @@
             <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
           </a>
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{% url 'homepage' %}" class="nav-link px-2 text-dark">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-dark">Features</a></li>
-            <li><a href="#" class="nav-link px-2 text-dark">Pricing</a></li>
-            <li><a href="{% url 'cart' %}" class="nav-link px-2 text-dark">Cart</a></li>
-            <li><a href="#" class="nav-link px-2 text-dark">Basket</a></li>
+            <li><a href="{% url 'homepage' %}" class="nav-link px-2 text-dark">Главная страница</a></li>
+            <li><a href="#" class="nav-link px-2 text-dark">Функции</a></li>
+            <li><a href="#" class="nav-link px-2 text-dark">Ценообразование</a></li>
+            <li><a href="{% url 'cart' %}" class="nav-link px-2 text-dark">Корзина</a></li>
           </ul>
-  
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input type="search" class="form-control btn btn-outline-warning form-control-dark btn-warning" placeholder="Search..." aria-label="Search" >
-            
-          </form>
+          <div class="col-sm-3 col-md-3 me-5">
+            <form method="POST" action="{% url 'search' %}" class="navbar-form justify-content-center" role="search">
+              {% csrf_token %}
+            <div class="input-group">
+                <input type="search" name="searched_product" class="form-control btn btn-outline-warning form-control-dark btn-warning" placeholder="Поиск..." aria-label="Search">
+                    <button class="btn btn-warning" type="submit">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                    </svg>
+                  </button>
+            </div>
+            </form>
+        </div>
           {% if request.user.is_authenticated %}
           <form method="get" action="{% url 'signout' %}">
             <button class="btn btn-warning" >Log-out</button>
           </form>
           {% else %}
           <form method="get" action="{% url 'signin' %}" >
-            <button type="submit" class="btn btn-outline-light me-2">Login</button>
+            <button type="submit" class="btn btn-outline-light me-2">Авторизоваться</button>
           </form> 
           {% endif %}
           <div class="text-end">
           <form method="get" action="{% url 'register' %}">
-            <button class="btn btn-warning" >Sign-up</button>
+            <button class="btn btn-warning" >Регистрация</button>
           </form>
           </div>
         </div>
@@ -102,7 +106,7 @@
     </header>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="check" viewBox="0 0 16 16">
-    <title>Check</title>
+    <title>Проверять</title>
     <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
   </symbol>
 </svg>
@@ -133,18 +137,18 @@
     <div class="container py-3">
 
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-      <p class="col-md-4 mb-0 text-muted">© 2021 Company, Inc</p>
+      <p class="col-md-4 mb-0 text-muted">© 2021 Компания, Представлять</p>
   
       <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#"></use></svg>
       </a>
   
       <ul class="nav col-md-4 justify-content-end">
-        <li class="nav-item"><a href="{% url 'homepage' %}" class="nav-link px-2 text-muted">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-        <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link px-2 text-muted">Cart</a></li>
-        <li class="nav-item"><a href="https://nurmatovvw.github.io/aboutme/" target="_blank" class="nav-link px-2 text-muted">About</a></li>
+        <li class="nav-item"><a href="{% url 'homepage' %}" class="nav-link px-2 text-muted">Главная страница</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Функции</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Ценообразование</a></li>
+        <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link px-2 text-muted">Корзина</a></li>
+        <li class="nav-item"><a href="https://nurmatovvw.github.io/aboutme/" target="_blank" class="nav-link px-2 text-muted">О нас</a></li>
       </ul>
     </footer>
 </div>
